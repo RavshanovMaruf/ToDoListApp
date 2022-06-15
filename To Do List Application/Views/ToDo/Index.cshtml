@@ -1,0 +1,32 @@
+﻿@model IEnumerable<domain_entities.ToDoList>
+
+@{
+    Layout = "_Layout";
+}
+
+<h1>List of TODOLISTS</h1>
+
+<p>
+    <a asp-action="Create">Add new ToDo List</a>
+</p>
+
+<p>
+    <a asp-action="create" asp-controller="ToDoItems">Add new item</a>
+</p>
+
+<p>
+    Below are a few lists
+</p>
+
+<div class="lists">
+    @foreach (var list in Model)
+    {
+        <h2>
+            <span>@list.Id. </span>
+            @Html.ActionLink(list.Name, "Index", "ToDoItems",
+                    new { Name = list.Name }
+                )
+        </h2>
+        <a asp-action="Delete" asp-route-id="@list.Id">Delete     </a>
+    }
+</div>
