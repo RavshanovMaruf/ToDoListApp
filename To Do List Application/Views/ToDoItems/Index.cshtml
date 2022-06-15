@@ -1,0 +1,87 @@
+﻿@model IEnumerable<domain_entities.ToDoItems>
+
+@{
+    Layout = "_Layout";
+}
+<h1>
+    @foreach (var item in Model)
+    {
+        @Html.DisplayFor(model => item.ListName)
+        break;
+    }
+</h1>
+
+<p>
+    @*<a asp-action="create">Add new item</a>
+    @foreach (var item in Model)
+    {
+
+        @Html.ActionLink("Add new item", "create", "ToDoItems",
+                    new { ListName = item.ListName }
+        )
+        break;
+    }*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Content
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                CreationDate
+            </th>
+            <th>
+                DueDate
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var creationDateShort = item.CreationDate.ToShortDateString();
+            var dueDateShort = item.DueDate.ToShortDateString();
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => creationDateShort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => dueDateShort)
+                </td>
+                <td>
+                    @if (item.Status == 0)
+                    {
+                        <p>Not Started</p>
+                    }
+                    @if (item.Status == 1)
+                    {
+                        <p>In progress</p>
+                    }
+                    @if (item.Status == 2)
+                    {
+                        <p>Completed</p>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit   </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete     </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
