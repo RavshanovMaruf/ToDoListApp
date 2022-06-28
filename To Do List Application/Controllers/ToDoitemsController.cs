@@ -48,7 +48,8 @@ namespace To_Do_List_Application.Controllers
         [Route("edit")]
         public ActionResult Edit(int id)
         {
-            return View();
+            var item = dbItems.ToDoItem.Where(x => x.Id == id).FirstOrDefault();
+            return View(item);
         }
 
         [HttpPost]

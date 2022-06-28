@@ -25,12 +25,6 @@ namespace To_Do_List_Application.Controllers
             return View(results);
         }
 
-        /*[Route("create")]
-        public ActionResult Create()
-        {
-            return View();
-        }*/
-
         //[HttpPost]
         [Route("create")]
         public IActionResult Create(ToDoList list)
