@@ -27,7 +27,18 @@ namespace To_Do_List_Application.Controllers
 
             res = dbItems.ToDoItem.Where(x => x.ListName == list.Name).ToList();
 
-            return View(res);
+            foreach(ToDoItems item in res)
+            {
+                if (item.DueDate == DateTime.Today)
+                {
+
+                }
+            }
+            
+            if (res.Count != 0)
+                return View(res);
+            else
+                return Redirect("/todoitems/empty");
         }
 
         [Route("create")]
@@ -75,6 +86,11 @@ namespace To_Do_List_Application.Controllers
             dbItems.ToDoItem.Remove(item);
             dbItems.SaveChanges();
             return Redirect("/home");
+        }
+        [Route("empty")]
+        public ActionResult Empty()
+        {
+            return View();
         }
     }
 }

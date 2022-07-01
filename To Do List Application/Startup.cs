@@ -31,6 +31,8 @@ namespace To_Do_List_Application
                 .GetConnectionString("ToDoDbContext")));
             services.AddDbContext<ToDoItemsDbContext>(options => options.UseSqlServer(Configuration
                 .GetConnectionString("ToDoItemsDbContext")));
+            services.AddDbContext<AccountDbContext>(options => options.UseSqlServer(Configuration
+                .GetConnectionString("AccountDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
