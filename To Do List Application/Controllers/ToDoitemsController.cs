@@ -31,7 +31,7 @@ namespace To_Do_List_Application.Controllers
             {
                 if (item.DueDate == DateTime.Today)
                 {
-
+                    Console.WriteLine("Today");
                 }
             }
             
@@ -51,9 +51,15 @@ namespace To_Do_List_Application.Controllers
         [Route("create")]
         public ActionResult Create(ToDoItems item)
         {
-            dbItems.Add(item);
-            dbItems.SaveChanges();
-            return Redirect("/home");
+            if (!string.IsNullOrWhiteSpace(item.Title)
+                && !string.IsNullOrWhiteSpace(item.ListName)
+                && item.Status >=0 && item.Status <= 2)
+            {
+                dbItems.Add(item);
+                dbItems.SaveChanges();
+                return Redirect("/todo");
+            }
+            return View(item);
         }
 
         [Route("edit")]
@@ -69,7 +75,7 @@ namespace To_Do_List_Application.Controllers
         {
             dbItems.Update(item);
             dbItems.SaveChanges();
-            return Redirect("/home");
+            return Redirect("/todo");
         }
 
         [Route("delete")]
@@ -85,7 +91,7 @@ namespace To_Do_List_Application.Controllers
             var item = dbItems.ToDoItem.Where(x => x.Id == id).First();
             dbItems.ToDoItem.Remove(item);
             dbItems.SaveChanges();
-            return Redirect("/home");
+            return Redirect("/todo");
         }
         [Route("empty")]
         public ActionResult Empty()

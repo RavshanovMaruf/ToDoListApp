@@ -9,9 +9,14 @@ using System.Collections.Generic;
 namespace todo_app_test
 {
     [TestFixture]
-    public class Tests
+    public class Tests : IDisposable
     {
         private readonly ToDoDbContext db;
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
         //gitlab change
         [Test]
