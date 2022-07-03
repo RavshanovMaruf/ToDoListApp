@@ -9,71 +9,145 @@ namespace To_Do_List_Application.Controllers
     [Route("todoitems")]
     public class ToDoitemsController : Controller
     {
-        private readonly ToDoDbContext db;
-        private readonly ToDoItemsDbContext dbItems;
+        private readonly ItemsListDbContext _dbListItems;
 
-        public ToDoitemsController(ToDoDbContext db, ToDoItemsDbContext dbItems)
+        /// <summary>
+        /// Constructor to get database context
+        /// </summary>
+        public ToDoitemsController(ItemsListDbContext dbItemsList)
         {
-            this.db = db;
-            this.dbItems = dbItems;
+            _dbListItems = dbItemsList;
         }
 
+        /// <summary>
+        /// Default page.
+        /// </summary>
+        /// <returns>
+        /// returns view with items.
+        /// </returns>
         [HttpGet]
         [Route("")]
         public ActionResult Index(ToDoList list)
         {
-            var items = dbItems.ToDoItem;
+            var items = _dbListItems.Items;
             List<ToDoItems> res = new List<ToDoItems>();
-
-            res = dbItems.ToDoItem.Where(x => x.ListName == list.Name).ToList();
-
-            return View(res);
+            
+            res = _dbListItems.Items.Where(x => x.ListName == list.Name).ToList();
+            
+            if (res.Count != 0)
+                return View(res);
+            else
+                return Redirect("/todoitems/empty");
         }
 
+        /// <summary>
+        /// Create page.
+        /// </summary>
+        /// <returns>
+        /// returns view.
+        /// </returns>
         [Route("create")]
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// HttpPost  Create page.
+        /// </summary>
+        /// <returns>
+        /// redirects to default page if title, listName and status is not null.
+        /// else returns create view
+        /// </returns>
         [HttpPost]
         [Route("create")]
         public ActionResult Create(ToDoItems item)
         {
-            dbItems.Add(item);
-            dbItems.SaveChanges();
-            return Redirect("/home");
+            if (!string.IsNullOrWhiteSpace(item.Title)
+                && !string.IsNullOrWhiteSpace(item.ListName)
+                && item.Status >= 0 && item.Status <= 2)
+            {
+                _dbListItems.Add(item);
+                _dbListItems.SaveChanges();
+                return Redirect("/todo");
+            }
+            return View(item);
         }
 
+        /// <summary>
+        /// HttpGet  Edit page.
+        /// </summary>
+        /// <returns>
+        /// returns view with editing list.
+        /// </returns>
         [Route("edit")]
         public ActionResult Edit(int id)
         {
-            return View();
+            var item = _dbListItems.Items.Where(x => x.Id == id).FirstOrDefault();
+            return View(item);
         }
 
+        /// <summary>
+        /// HttpPost  Edit page.
+        /// </summary>
+        /// <returns>
+        /// redirects to default page if title, listnames are not null
+        /// else returns view with editing list.
+        /// </returns>
         [HttpPost]
         [Route("edit")]
         public ActionResult Edit(ToDoItems item)
         {
-            dbItems.Update(item);
-            dbItems.SaveChanges();
-            return Redirect("/home");
-        }
+            if (!string.IsNullOrWhiteSpace(item.Title)
+                && !string.IsNullOrWhiteSpace(item.ListName)
+                && item.Status >= 0 && item.Status <= 2)
+            {
+                _dbListItems.Update(item);
+                _dbListItems.SaveChanges();
 
-        [Route("delete")]
-        public ActionResult Delete(int id)
-        {
-            var item = dbItems.ToDoItem.Where(x => x.Id == id).FirstOrDefault();
+                return Redirect("/todo");
+            }
             return View(item);
         }
 
+        /// <summary>
+        /// HttpGet  Delete page.
+        /// </summary>
+        /// <returns>
+        /// returns view with deleting list.
+        /// </returns>
+        [Route("delete")]
+        public ActionResult Delete(int id)
+        {
+            var item = _dbListItems.Items.Where(x => x.Id == id).FirstOrDefault();
+            return View(item);
+        }
+
+        /// <summary>
+        /// HttpPost  Delete page.
+        /// </summary>
+        /// <returns>
+        /// redirects to default page.
+        /// </returns>
         [Route("deleteconfirm")]
         public ActionResult DeleteConfirm(int id)
         {
-            var item = dbItems.ToDoItem.Where(x => x.Id == id).First();
-            dbItems.ToDoItem.Remove(item);
-            dbItems.SaveChanges();
-            return Redirect("/home");
+            var item = _dbListItems.Items.Where(x => x.Id == id).First();
+            _dbListItems.Items.Remove(item);
+            _dbListItems.SaveChanges();
+            return Redirect("/todo");
+        }
+
+        /// <summary>
+        /// if there is no items in the list
+        /// </summary>
+        /// <returns>
+        /// returns view
+        /// </returns>
+        [Route("empty")]
+        public ActionResult Empty()
+        {
+            return View();
         }
     }
 }

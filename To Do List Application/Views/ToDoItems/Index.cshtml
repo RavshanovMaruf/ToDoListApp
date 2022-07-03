@@ -9,8 +9,30 @@
         @Html.DisplayFor(model => item.ListName)
         break;
     }
+
+    @*foreach (var item in Model)
+    {
+        var creationDateShort = item.CreationDate.ToShortDateString();
+        var dueDateShort = item.DueDate.ToShortDateString();
+        @if (dueDateShort == DateTime.Today.ToString())
+        {
+            @Html.Display("Today: " + item.Title);
+        }
+        else
+        {
+            @Html.Display("Not Today");
+        }
+    }*@
 </h1>
 
+@*
+<input type="button" id="btnpopu" value="Open Modeless popup" onclick="ShowPopup();" />  
+<script type="text/javascript">  
+    ShowPopup = function () {  
+        window.open('/Home/OpenPopup', "PopupWindow", 'width=400px,height=400px,top=150,left=250');  
+    }  
+</script> 
+*@
 <p>
     @*<a asp-action="create">Add new item</a>
     @foreach (var item in Model)

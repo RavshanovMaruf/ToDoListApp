@@ -9,78 +9,22 @@ using System.Collections.Generic;
 namespace todo_app_test
 {
     [TestFixture]
-    public class Tests
+    public class Tests : IDisposable
     {
         private readonly ToDoDbContext db;
 
-        [TestCase("String", "String")]
-        [TestCase("Second", "Second")]
-        [TestCase("Third", "Third")]
-        [TestCase("Fourth", "Fourth")]
-        [TestCase("Fifth", "Fifth")]
-        public void CreateMethod(string exp, string actual)
+        public void Dispose()
         {
-            var controller = new ToDoController();
-            var ToDoList = new ToDoList { Id = 11, Name = "Unit" };
-            List<ToDoList> explist = new List<ToDoList>();
-
-            Assert.AreEqual(exp, actual);
+            throw new NotImplementedException();//ToDoList.ClearAll();
         }
 
-        [TestCase("String", "String")]
-        [TestCase("Second", "Second")]
-        [TestCase("Third", "Third")]
-        [TestCase("Fourth", "Fourth")]
-        [TestCase("Fifth", "Fifth")]
-        public void SecondMethod(string exp, string actual)
+        //gitlab change
+
+        [Test]
+        public void CategoryConstructor_CreatesInstanceOfCategory_Category()
         {
-            var controller = new ToDoController();
-            var ToDoList = new ToDoList { Id = 11, Name = "Unit" };
-            List<ToDoList> explist = new List<ToDoList>();
-
-            Assert.AreEqual(exp, actual);
-        }
-
-        [TestCase("String", "String")]
-        [TestCase("Second", "Second")]
-        [TestCase("Third", "Third")]
-        [TestCase("Fourth", "Fourth")]
-        [TestCase("Fifth", "Fifth")]
-        public void ThirdMethod(string exp, string actual)
-        {
-            var controller = new ToDoController();
-            var ToDoList = new ToDoList { Id = 11, Name = "Unit" };
-            List<ToDoList> explist = new List<ToDoList>();
-
-            Assert.AreEqual(exp, actual);
-        }
-
-        [TestCase("String", "String")]
-        [TestCase("Second", "Second")]
-        [TestCase("Third", "Third")]
-        [TestCase("Fourth", "Fourth")]
-        [TestCase("Fifth", "Fifth")]
-        public void FourthMethod(string exp, string actual)
-        {
-            var controller = new ToDoController();
-            var ToDoList = new ToDoList { Id = 11, Name = "Unit" };
-            List<ToDoList> explist = new List<ToDoList>();
-
-            Assert.AreEqual(exp, actual);
-        }
-
-        [TestCase("String", "String")]
-        [TestCase("Second", "Second")]
-        [TestCase("Third", "Third")]
-        [TestCase("Fourth", "Fourth")]
-        [TestCase("Fifth", "Fifth")]
-        public void FifthMethod(string exp, string actual)
-        {
-            var controller = new ToDoController();
-            var ToDoList = new ToDoList { Id = 11, Name = "Unit" };
-            List<ToDoList> explist = new List<ToDoList>();
-
-            Assert.AreEqual(exp, actual);
+            //ToDoList list = new ToDoList("test category");
+            //Assert.AreEqual(typeof(ToDoList), list.GetType());
         }
 
         [Test]

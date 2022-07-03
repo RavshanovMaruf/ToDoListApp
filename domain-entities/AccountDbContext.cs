@@ -5,13 +5,12 @@ using System.Text;
 
 namespace domain_entities
 {
-    public class ToDoItemsDbContext : DbContext
+    public class AccountDbContext : DbContext
     {
-        public ToDoItemsDbContext(DbContextOptions<ToDoItemsDbContext> options) : base(options)
+        public AccountDbContext(DbContextOptions<AccountDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
-
-        public DbSet<ToDoItems> ToDoItem { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

@@ -7,6 +7,11 @@ namespace domain_entities
 {
     public class ToDoItems
     {
+        public ToDoItems()
+        {
+            this.JoinEntities = new HashSet<ItemsList>();
+        }
+
         private int status;
         public int Id { get; set; }
 
@@ -32,5 +37,6 @@ namespace domain_entities
                 }
             }
         }
+        public virtual ICollection<ItemsList> JoinEntities { get; set; }
     }
 }

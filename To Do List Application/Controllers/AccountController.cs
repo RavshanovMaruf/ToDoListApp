@@ -1,17 +1,10 @@
 ﻿using domain_entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using To_Do_List_Application.Models;
 
 namespace To_Do_List_Application.Controllers
 {
-
-    public class HomeController : Controller
+    public class AccountController : Controller
     {
         private readonly AccountDbContext dbAccounts;
 
@@ -19,7 +12,7 @@ namespace To_Do_List_Application.Controllers
         /// Gets AccountDbContext
         /// </summary>
         /// <param name="dbAccounts"></param>
-        public HomeController(AccountDbContext dbAccounts)
+        public AccountController(AccountDbContext dbAccounts)
         {
             this.dbAccounts = dbAccounts;
         }
