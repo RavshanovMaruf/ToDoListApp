@@ -15,15 +15,30 @@ namespace To_Do_List_Application.Controllers
     {
         private readonly AccountDbContext dbAccounts;
 
+        /// <summary>
+        /// Gets AccountDbContext
+        /// </summary>
+        /// <param name="dbAccounts"></param>
         public HomeController(AccountDbContext dbAccounts)
         {
             this.dbAccounts = dbAccounts;
         }
+
+        /// <summary>
+        /// default page
+        /// </summary>
+        /// <returns>View</returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// HttpPost default page
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>redirects to ToDo Default page if login succeed
+        /// else returns view</returns>
         [HttpPost]
         public IActionResult Index(Account account)
         {
@@ -36,11 +51,21 @@ namespace To_Do_List_Application.Controllers
             return View();
         }
 
+        /// <summary>
+        /// HttpGet create page
+        /// </summary>
+        /// <returns>View</returns>
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// HttpPost create page
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>redirects to default page if succeed
+        /// else returns View</returns>
         [HttpPost]
         public IActionResult Create(Account account)
         {
@@ -53,55 +78,5 @@ namespace To_Do_List_Application.Controllers
             }
             return View(account);
         }
-        /*
-        private readonly ILogger<HomeController> _logger;
-        private readonly ToDoDbContext _db;
-
-        public HomeController(ILogger<HomeController> logger, ToDoDbContext db)
-        {
-            _logger = logger;
-            _db = db;
-        }
-        public ActionResult Index()
-        {
-            var results = _db.ToDoList.ToList();
-            return View(results);
-        }
-
-        public string OpenPopup()
-        {
-            return "<h1> This Is Modeless Popup Window</h1>";
-        }
-
-        [Route("create")]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("create")]
-        public ActionResult Create(ToDoList list)
-        {
-            _db.Add(list);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        [Route("delete")]
-        public ActionResult Delete(int id)
-        {
-            var item = _db.ToDoList.Where(x => x.Id == id).FirstOrDefault();
-            return View(item);
-        }
-
-        [HttpPost]
-        [Route("delete")]
-        public ActionResult Delete(ToDoList list)
-        {
-            _db.ToDoList.Remove(list);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
     }
 }

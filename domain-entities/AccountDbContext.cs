@@ -11,7 +11,6 @@ namespace domain_entities
         {
             Database.EnsureCreated();
         }
-
         public DbSet<Account> Accounts { get; set; }
     }
 }

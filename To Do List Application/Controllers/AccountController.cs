@@ -8,15 +8,30 @@ namespace To_Do_List_Application.Controllers
     {
         private readonly AccountDbContext dbAccounts;
 
+        /// <summary>
+        /// Gets AccountDbContext
+        /// </summary>
+        /// <param name="dbAccounts"></param>
         public AccountController(AccountDbContext dbAccounts)
         {
             this.dbAccounts = dbAccounts;
         }
+
+        /// <summary>
+        /// default page
+        /// </summary>
+        /// <returns>View</returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// HttpPost default page
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>redirects to ToDo Default page if login succeed
+        /// else returns view</returns>
         [HttpPost]
         public IActionResult Index(Account account)
         {
@@ -29,11 +44,21 @@ namespace To_Do_List_Application.Controllers
             return View();
         }
 
+        /// <summary>
+        /// HttpGet create page
+        /// </summary>
+        /// <returns>View</returns>
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// HttpPost create page
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>redirects to default page if succeed
+        /// else returns View</returns>
         [HttpPost]
         public IActionResult Create(Account account)
         {
