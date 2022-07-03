@@ -15,10 +15,18 @@ namespace todo_app_test
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();//ToDoList.ClearAll();
         }
 
         //gitlab change
+
+        [Test]
+        public void CategoryConstructor_CreatesInstanceOfCategory_Category()
+        {
+            //ToDoList list = new ToDoList("test category");
+            //Assert.AreEqual(typeof(ToDoList), list.GetType());
+        }
+
         [Test]
         public void ClassCreated()
         {

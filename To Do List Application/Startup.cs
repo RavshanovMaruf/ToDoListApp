@@ -27,12 +27,14 @@ namespace To_Do_List_Application
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<ToDoDbContext>(options => options.UseSqlServer(Configuration
+            /*services.AddDbContext<ToDoDbContext>(options => options.UseSqlServer(Configuration
                 .GetConnectionString("ToDoDbContext")));
             services.AddDbContext<ToDoItemsDbContext>(options => options.UseSqlServer(Configuration
-                .GetConnectionString("ToDoItemsDbContext")));
+                .GetConnectionString("ToDoItemsDbContext")));*/
             services.AddDbContext<AccountDbContext>(options => options.UseSqlServer(Configuration
                 .GetConnectionString("AccountDbContext")));
+            services.AddDbContext<ItemsListDbContext>(options => options.UseSqlServer(Configuration
+                .GetConnectionString("ItemsListDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
