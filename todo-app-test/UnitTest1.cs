@@ -11,7 +11,8 @@ namespace todo_app_test
     [TestFixture]
     public class Tests : IDisposable
     {
-        private readonly ToDoDbContext db;
+        //private readonly ToDoDbContext db;
+        //gg
 
         public void Dispose()
         {
