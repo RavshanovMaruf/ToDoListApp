@@ -57,9 +57,13 @@ namespace To_Do_List_Application.Controllers
         [Route("create")]
         public ActionResult Create(ToDoList list)
         {
-            _dbItemsList.Lists.Add(list);
-            _dbItemsList.SaveChanges();
-            return RedirectToAction("Index");
+            if (!string.IsNullOrWhiteSpace(list.Name))
+            {
+                _dbItemsList.Lists.Add(list);
+                _dbItemsList.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         /// <summary>

@@ -12,7 +12,6 @@ namespace todo_app_test
     public class Tests : IDisposable
     {
         //private readonly ToDoDbContext db;
-        //gg
 
         public void Dispose()
         {
