@@ -35,7 +35,7 @@ namespace To_Do_List_Application.Controllers
             res = _dbListItems.Items.Where(x => x.ListName == list.Name).ToList();
             
             if (res.Count != 0)
-                return View(res);
+                return View("Index", res);
             else
                 return Redirect("/todoitems/empty");
         }
@@ -49,7 +49,7 @@ namespace To_Do_List_Application.Controllers
         [Route("create")]
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace To_Do_List_Application.Controllers
                 _dbListItems.SaveChanges();
                 return Redirect("/todo");
             }
-            return View(item);
+            return View("Create", item);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace To_Do_List_Application.Controllers
         public ActionResult Edit(int id)
         {
             var item = _dbListItems.Items.Where(x => x.Id == id).FirstOrDefault();
-            return View(item);
+            return View("Edit", item);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace To_Do_List_Application.Controllers
 
                 return Redirect("/todo");
             }
-            return View(item);
+            return View("Edit", item);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace To_Do_List_Application.Controllers
         public ActionResult Delete(int id)
         {
             var item = _dbListItems.Items.Where(x => x.Id == id).FirstOrDefault();
-            return View(item);
+            return View("Delete", item);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace To_Do_List_Application.Controllers
         [Route("empty")]
         public ActionResult Empty()
         {
-            return View();
+            return View("Empty");
         }
     }
 }

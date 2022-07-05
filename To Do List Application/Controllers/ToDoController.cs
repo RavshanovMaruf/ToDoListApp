@@ -10,16 +10,16 @@ namespace To_Do_List_Application.Controllers
     [Route("todo")]
     public class ToDoController : Controller
     {
-        private readonly ILogger<ToDoController> _logger;
+        //private readonly ILogger<ToDoController> _logger;
 
         private readonly ItemsListDbContext _dbItemsList;
 
         /// <summary>
         /// Constructor to get logger and database context
         /// </summary>
-        public ToDoController(ILogger<ToDoController> logger, /*ToDoDbContext db,*/ ItemsListDbContext dbItemsList)
+        public ToDoController(/*ILogger<ToDoController> logger, /*ToDoDbContext db,*/ ItemsListDbContext dbItemsList)
         {
-            _logger = logger;
+            //_logger = logger;
             _dbItemsList = dbItemsList;
         }
 
@@ -32,7 +32,7 @@ namespace To_Do_List_Application.Controllers
         public ActionResult Index()
         {
             var model = _dbItemsList.Lists.ToList();
-            return View(model);
+            return View("Index", model);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace To_Do_List_Application.Controllers
         [Route("create")]
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace To_Do_List_Application.Controllers
                 _dbItemsList.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View("Create");
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace To_Do_List_Application.Controllers
         public ActionResult Delete(int id)
         {
             var item = _dbItemsList.Lists.Where(x => x.Id == id).FirstOrDefault();
-            return View(item);
+            return View("Delete", item);
         }
 
         /// <summary>

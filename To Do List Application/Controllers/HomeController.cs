@@ -14,6 +14,7 @@ namespace To_Do_List_Application.Controllers
     public class HomeController : Controller
     {
         private readonly AccountDbContext dbAccounts;
+        //public static HomeController ThisInstance = null;
 
         /// <summary>
         /// Gets AccountDbContext
@@ -22,6 +23,7 @@ namespace To_Do_List_Application.Controllers
         public HomeController(AccountDbContext dbAccounts)
         {
             this.dbAccounts = dbAccounts;
+            //ThisInstance = this;
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace To_Do_List_Application.Controllers
         /// <returns>View</returns>
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace To_Do_List_Application.Controllers
             {
                 return RedirectToAction("Index", "ToDo");
             }
-            return View();
+            return View("Index");
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace To_Do_List_Application.Controllers
         /// <returns>View</returns>
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         /// <summary>
